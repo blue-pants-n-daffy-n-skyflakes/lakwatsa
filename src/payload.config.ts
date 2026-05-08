@@ -70,7 +70,11 @@ export default buildConfig({
     vercelBlobStorage({
       collections: {
         media: {
-          disablePayloadAccessControl: true, // This forces the direct CDN URL
+          // Use an arrow function to force the full URL. 
+          // This bypasses the 500 error by pointing directly to the CDN.
+          generateFileURL: ({ filename }) => {
+            return `https://${process.env.BLOB_READ_WRITE_TOKEN_DOMAIN}/${filename}`
+          },
         },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
