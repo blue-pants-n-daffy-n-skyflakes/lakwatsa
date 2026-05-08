@@ -69,12 +69,8 @@ export default buildConfig({
     ...plugins,
     vercelBlobStorage({
       collections: {
-        media: true,
-        // This stops Payload from trying to serve the file itself
-        disablePayloadAccessControl: true, 
-        // This ensures generated thumbnails also get uploaded to Blob
-        generateFileURL: (args) => {
-          return `https://${process.env.BLOB_READ_WRITE_TOKEN_DOMAIN}/${args.prefix}/${args.filename}`
+        media: {
+          disablePayloadAccessControl: true, // This forces the direct CDN URL
         },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
