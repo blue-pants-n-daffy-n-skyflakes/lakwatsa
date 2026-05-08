@@ -40,8 +40,9 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/media'),
+    // 1. Change this to /tmp (the only writable spot on Vercel)
+    staticDir: '/tmp', 
+    // 2. THIS IS CRITICAL: Stop Payload from checking the disk for files
     disableLocalStorage: true,
     adminThumbnail: 'thumbnail',
     focalPoint: true,

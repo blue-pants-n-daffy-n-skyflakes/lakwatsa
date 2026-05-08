@@ -70,11 +70,11 @@ export default buildConfig({
     vercelBlobStorage({
       collections: {
         media: {
-          // Use an arrow function to force the full URL. 
-          // This bypasses the 500 error by pointing directly to the CDN.
-          generateFileURL: ({ filename }) => {
-            return `https://${process.env.BLOB_READ_WRITE_TOKEN_DOMAIN}/${filename}`
-          },
+        generateFileURL: (args) => {
+        // This ensures the main image AND all sizes (thumbnails) 
+        // use the Vercel Blob domain
+        return `https://${process.env.BLOB_READ_WRITE_TOKEN_DOMAIN}/${args.filename}`
+      },
         },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
