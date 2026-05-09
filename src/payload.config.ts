@@ -69,12 +69,7 @@ export default buildConfig({
     ...plugins,
     vercelBlobStorage({
       collections: {
-        media: {
-        generateFileURL: (args) => {
-        // This ensures the main image AND all sizes (thumbnails) 
-        // use the Vercel Blob domain
-        return `https://${process.env.BLOB_READ_WRITE_TOKEN_DOMAIN}/${args.filename}`
-      },
+          media: true,
         },
       },
       token: process.env.BLOB_READ_WRITE_TOKEN || '',
